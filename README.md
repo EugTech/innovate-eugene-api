@@ -38,5 +38,5 @@ This is the quick hit todo list for our Monday deadline.
 
 - [x] Created project and have tested and provable code.
 - [x] Support other spreadsheet type services.
-- [ ] Move code to Eugene Tech github.
+- [x] Move code to Eugene Tech github.
 - [ ] Get server hosting? 
