@@ -1,3 +1,18 @@
+#Stored data from airtable
+DATA/*
+
+# VS Code files
+*.code-workspace
+.vscode
+*.DS_Store
+
+#Ignore the swap files.
+*.swp
+
+# Package Locks not needed...
+package-lock.json
+
+
 # Logs
 logs
 *.log
