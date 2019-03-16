@@ -1,13 +1,7 @@
 # Tools and Utilities
 Use these helpful scripts on the server or desktop. 
 
- 
-- [SaveAllData](#savealldata) 
-
-
-
-
-
+Add more tools and document them here. :-)
 
 
 # SaveAllData
