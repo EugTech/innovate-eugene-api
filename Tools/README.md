@@ -25,6 +25,26 @@ If you are running Windows then do this....
     cd Tools
     node SaveTallData.js
 
+# WriteExcelFile
+Use this tool to create `FullDataExport.xlsx` in the DATA folder
+of all the data from the DATA folder. Run this after the *SaveAllData*
+to get everything. 
+
+*MAKE SURE YOU HAVE CREATED A `DATA` FOLDER!*
+
+    cd Tools
+    ./WriteExcelFile.js
+
+If you are running Windows then do this....
+
+    cd Tools
+    node WriteExcelFile.js
+
+
+
+
+
+
 
 # Debugging Tools
 Visual Studio Code is a great tool to use to debug nodejs but you can 
