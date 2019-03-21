@@ -9,23 +9,6 @@ const DATA_FOLDER = require("./DATA_FOLDER");
 
 
 
-
-// const SecretFolder = path.join(__dirname, '../SECRET/');
-
-// /*
-//     Create the folders we need if the user didn't do it on their own. This happens
-//     when they don't actually read the README. :-)
-// */
-
-// if (!fs.existsSync(SecretFolder)) {
-//     fs.mkdirSync(SecretFolder);
-// }
-
-
-
-
-
-
 /*
     This is your opertunity to set configuration settings 
     for the entire module. Shortcuts are awesome!  :-)
@@ -63,7 +46,7 @@ function GetGridViewData(sheetName, AirTableBase, OnData) {
 
 
     if (CONFIG.UseDisk) {
-        const data = DATA_FOLDER.Disk.GetData(sheetName);
+        const data = DATA_FOLDER.Disk.GetData(sheetName);       
         OnData(null, data);
     } else {
 

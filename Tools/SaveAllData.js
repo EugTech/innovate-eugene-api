@@ -35,9 +35,6 @@ var AirTableBase = AirTable.AirtableBase('appiPhOBADo9NMICo');
     Get this list from airtable.com!
 */
 const SheetNames = ['Assets', 'Asset Types', 'Entity Types', 'Study Tags'];
- 
-
-
 
 
 /*

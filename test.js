@@ -51,12 +51,7 @@ const TestMap = {
     },
     GetSingleViewDataSync() {
 
-        (async () => {
-
-
-
-
-
+        (async () => { 
 
             var AirTable = require("./LIB/AirTable.js");
 
@@ -74,7 +69,11 @@ const TestMap = {
             const ViewName = "Assets";
 
             var res = await AirTable.GetGridViewDataSync(ViewName, AirTableBase);
-            console.log(res);
+
+            //Show each row...
+            res.data.forEach(element => {
+                console.log(element);
+            });
 
 
         })();
@@ -83,9 +82,10 @@ const TestMap = {
     }
 };
 
- 
+
 
 //Which test case do you want to do?
- 
+
 // TestMap.GetSingleViewData();
 TestMap.GetSingleViewDataSync();
+
