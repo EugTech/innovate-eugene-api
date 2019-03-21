@@ -4,12 +4,12 @@ Use these helpful scripts on the server or desktop.
 Add more tools and document them here. :-)
 
 
+*MAKE SURE YOU HAVE CREATED A `DATA` FOLDER!*
+
 # SaveAllData
 Use this tool to save all the records from the airtable space 
 into json files in the DATA folder. Each "view" will get their
-own file name and json stuffed into it. 
-
-*MAKE SURE YOU HAVE CREATED A `DATA` FOLDER!*
+own file name and json stuffed into it.  
 
     cd Tools
     ./SaveTallData.js
@@ -24,8 +24,6 @@ Use this tool to create `FullDataExport.xlsx` in the DATA folder
 of all the data from the DATA folder. Run this after the *SaveAllData*
 to get everything. 
 
-*MAKE SURE YOU HAVE CREATED A `DATA` FOLDER!*
-
     cd Tools
     ./WriteExcelFile.js
 
@@ -35,7 +33,17 @@ If you are running Windows then do this....
     node WriteExcelFile.js
 
 
+# BuildObjectMap
+Use this tool to create `MasterMap.json` in the DATA folder.
+Run this after the *SaveAllData* to get ever 
 
+    cd Tools
+    ./BuildObjectMap.js
+
+If you are running Windows then do this....
+
+    cd Tools
+    node BuildObjectMap.js
 
 
 
