@@ -45,7 +45,7 @@ const ObjectMapAPI = {
             }
 
         }
-        // console.log('Set ' + returnArray.length + ' total Study Tags.');
+        
         return returnArray;
 
     },
