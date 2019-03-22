@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<script>
+//SERVER-SIDE-REPLACE!!!
+</script>
+
+<body>
+
+    <h1>Local debug </h1>
+    <p>
+        This is the testing page for the server API.
+        Please make sure you open your console window
+        to see the results of testing.
+    </p>
+    
+
+    <table>
+        <tr>
+            <td>Actions</td>
+            <td>Testing Descriptions</td>
+        </tr>
+        <tr>
+            <td>
+                <button onclick="ServerAPI.GetHelp();">Get Help</button>
+                <button onclick="ServerAPI.GetHelp('listing assests');">Get Help on listing assests</button>
+            </td>
+            <td>Simple help api requests...</td>
+        </tr>
+    </table>
+
+    <script>
+        
+        /*
+            This is only available to the debug client. We 
+            don't put this in normal requests from users... 
+        */
+        console.log('Server side debug data:',debugdata);
+ 
+
+    </script>
+
+</body>
+
+</html>
