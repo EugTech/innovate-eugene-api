@@ -1,9 +1,12 @@
+#!/usr/bin/env node
+
+"use strict";
+
+
+
 /*
     Main entry point for the "/api" proxy app.
 */
-
-
-
 
 global.SERVER = {
     Started: new Date(),
