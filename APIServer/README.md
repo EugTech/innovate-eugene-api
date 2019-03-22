@@ -1,6 +1,13 @@
 # API Server
 Current server is at http://35.247.92.22/
 
+To debug use http://35.247.92.22/api
+
+
+To debug local use http://0.0.0.0:9118/
+
+
+
 Manage it using this...
 https://console.cloud.google.com/compute/instances?project=eugtech-asset-inventory&instancessize=50
 

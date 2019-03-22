@@ -49,34 +49,29 @@ const IPC = {
 
 
         //ignore this request. We are not a real web server!
-        if(request.url=="/favicon.ico"){
+        if (request.url == "/favicon.ico") {
             response.end();
             return;
         }
 
 
 
-        //This should always be local host since it's proxy from wordpress...
-        var ClientIP = request.connection.remoteAddress;
-
-        var ClientAgent = request.headers["user-agent"];
-
+        //This should always be local host since it's proxy from NGINX...
         request.HostOrigin = request.headers["origin"];
-
         request.Host = request.headers["host"];
-
-
-        // request.ClientIP = request.headers["x-real-ip"];
-        request.ClientIP = request.connection.remoteAddress;
-
 
         request.url = request.url.replace('/api/', '');
 
-
         //default to null!
-        request.User = null;
+        request.User = {
+            IPAddress: request.headers["x-real-ip"],
+            RemoteIP: request.connection.remoteAddress,
+            ClientAgent: request.headers["user-agent"],
+            URL: request.url
+        };
 
 
+        console.log('Serving User:',request.User);
 
 
         // How did they try to get to the server?
@@ -115,7 +110,7 @@ const IPC = {
 
                                 //Do not allow ".." in the path!!!!
                                 var servicePath = request.url.replace(/\./g, '');
-                            
+
 
                                 const finalServicePath = path.resolve(path.join(__dirname, "services", path.normalize(path.join(servicePath, 'index.js'))));
 
@@ -149,15 +144,15 @@ const IPC = {
 
                 var debugHTML = fs.readFileSync(__dirname + "/debug.html", "utf8");
                 var clientjs = fs.readFileSync(__dirname + "/client.js", "utf8");
-                
+
 
                 const debugdata = `
                 window.debugdata = {
                     port:${IPC.PORT}
                 };
-                `+clientjs;
+                `+ clientjs;
 
-                debugHTML = debugHTML.replace('//SERVER-SIDE-REPLACE!!!',debugdata);
+                debugHTML = debugHTML.replace('//SERVER-SIDE-REPLACE!!!', debugdata);
 
 
                 response.end(debugHTML);
