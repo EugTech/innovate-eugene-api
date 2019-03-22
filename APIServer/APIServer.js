@@ -60,7 +60,11 @@ const IPC = {
         request.HostOrigin = request.headers["origin"];
         request.Host = request.headers["host"];
 
+        //This happens for local debug...
         request.url = request.url.replace('/api/', '');
+
+        //This happens on the server...
+        request.url = request.url.replace('api/', '');
 
         //default to null!
         request.User = {
