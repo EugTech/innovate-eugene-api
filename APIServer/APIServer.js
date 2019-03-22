@@ -75,7 +75,8 @@ const IPC = {
         };
 
 
-        console.log('Serving User:',request.User);
+        // Use this only when you need to!!!
+        // console.log('Serving User:',request.User);
 
 
         // How did they try to get to the server?
@@ -142,10 +143,16 @@ const IPC = {
                 break
             case "GET":
 
+                /*
+                    No matter what they submit.. if it's a GET then they are using a 
+                    browser. It's not smart to use GET because of the limitations of 
+                    query string values.  :-)
+                */
                 response.writeHead(200, {
                     'Content-Type': 'text/html'
                 });
 
+                //This should most definitly not be sync!!!!
                 var debugHTML = fs.readFileSync(__dirname + "/debug.html", "utf8");
                 var clientjs = fs.readFileSync(__dirname + "/client.js", "utf8");
 
@@ -156,12 +163,10 @@ const IPC = {
                 };
                 `+ clientjs;
 
+                //Our debug HTML is a great way to make sure our stuff works. :-)
                 debugHTML = debugHTML.replace('//SERVER-SIDE-REPLACE!!!', debugdata);
 
-
                 response.end(debugHTML);
-
-
                 break;
             default:
                 // debugger;
@@ -174,4 +179,5 @@ const IPC = {
 };
 
 
+//Lets get this party started. :-)
 IPC.Start();

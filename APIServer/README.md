@@ -1,7 +1,8 @@
 # API Server
 Current server is at http://35.247.92.22/
 
-To debug use http://35.247.92.22/api
+** Make sure you use the last `/` in the url
+To debug use http://35.247.92.22/api/
 
 
 To debug local use http://0.0.0.0:9118/

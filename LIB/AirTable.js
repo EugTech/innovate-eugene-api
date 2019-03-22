@@ -131,7 +131,11 @@ exports.AirtableBase = function (TableID) {
         var base = new Airtable({ "apiKey": APIKEY }).base(TableID);
 
     } catch (errNoAPIKeyFile) {
-        console.log('Create a file "' + DATA_FOLDER.CONFIG_INFO.SecretFolder + 'airtable_apikey.txt"');
+        console.log(" ***** ***** ***** ***** ***** ***** ");
+        console.log(errNoAPIKeyFile);
+        console.log(" ***** ***** ***** ***** ***** ***** ");        
+        console.log('Unable to open file "' + DATA_FOLDER.CONFIG_INFO.SecretFolder + 'airtable_apikey.txt"');
+        console.log(" ***** ***** ***** ***** ***** ***** ");
         process.exit(1);
     }
     return base;
