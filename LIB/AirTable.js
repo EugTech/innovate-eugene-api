@@ -52,7 +52,7 @@ function GetGridViewData(sheetName, AirTableBase, OnData) {
 
         AirTableBase(sheetName).select({
             // Selecting the first 3 records in Main View:
-            maxRecords: 300,
+            maxRecords: CONFIG.TotalRecordsFetched,
             view: "Grid view"
             // This function (`page`) will get called for each page of records.
         }).eachPage(function page(records, fetchNextPage) {
@@ -121,14 +121,22 @@ exports.GetGridViewDataSync=GetGridViewDataSync;
     the airtable API object...
 */
 exports.AirtableBase = function (TableID) {
+    var base;
 
     try {
         
         const APIKEY = fs.readFileSync(DATA_FOLDER.CONFIG_INFO.SecretFolder + "airtable_apikey.txt", "utf8");
 
+        try{
 
-        var Airtable = require('airtable');
-        var base = new Airtable({ "apiKey": APIKEY }).base(TableID);
+            var Airtable = require('airtable');
+            base = new Airtable({ "apiKey": APIKEY }).base(TableID);            
+
+        }catch(errNPM){
+            console.log('Did you do an "npm update" in the root folder?');
+            process.exit(1);
+        }
+
 
     } catch (errNoAPIKeyFile) {
         console.log(" ***** ***** ***** ***** ***** ***** ");

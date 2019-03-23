@@ -25,6 +25,7 @@ var AirTable = require("../LIB/AirTable.js");
     when debugging because of rate limits on the API itself...
 */
 AirTable.CONFIG.UseDisk = false;
+AirTable.CONFIG.TotalRecordsFetched = 2000;
 
 
 //Set our base ID...

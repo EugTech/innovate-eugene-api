@@ -11,6 +11,7 @@
   "dependencies": {
     "airtable": "^0.5.9",
     "eslint": "^5.12.0",
+    "mysql": "^2.16.0",
     "request": "^2.88.0",
     "xlsx": "^0.14.1"
   }
