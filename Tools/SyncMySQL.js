@@ -15,12 +15,13 @@ global.SERVER = {
     RootFolder: __dirname,
     Arguments: []
 };
+
+//Load up our mysql server code....
 SERVER.SqlData = require('../LIB/MySQLData');
 
 
 
-const ObjectMapData = {};
-
+//Set our common table name for this script....
 const sqlTableName_assets = "`asset-inventory`.assets";
 
 
@@ -31,33 +32,35 @@ const sqlTableName_assets = "`asset-inventory`.assets";
     const ObjectMapAPI = {
 
         /*
-            Save the data to a file using our DATA_FOLDER....
+            Update our assets one by one...
         */
         UpdateAssests(AssetsData) {
             const Result = {
                 Updated: 0
             };
 
-         
+
             return new Promise(resolve => {
 
                 //Take our time and do each record one by one...
                 (async () => {
-   
+
                     for (let index = 0; index < AssetsData.length; index++) {
-                        
+
                         const asset = AssetsData[index];
-                        
+
                         //The length of the data is not always the same as whats been updated. Errors in the SQL will skip the row...
                         Result.Updated++;
-                 
+
+                        /*
+                            This is not the best way to to this! Of course sql injection is an issue
+                            and before this goes live we need to address this!!!!
+                        */
                         const sql = `
-                        INSERT INTO ${sqlTableName_assets}
-                        (AName,AssetTypeID,City,Zip,Unit,Notes)
-                        VALUES
+                        INSERT INTO ${sqlTableName_assets} (AName,AssetTypeID,City,Zip,Unit,Notes) VALUES
                         (
                             ${SERVER.SqlData.StripQuotesForString(asset.Name)},
-                            5,
+                            911,
                             ${SERVER.SqlData.StripQuotesForString(asset.City)},
                             ${SERVER.SqlData.StripQuotesForString(asset.Zip)}, 
                             ${SERVER.SqlData.StripQuotesForString(asset.Unit)},
@@ -65,20 +68,22 @@ const sqlTableName_assets = "`asset-inventory`.assets";
                         );`;
 
 
-
+                        // Wait for that sql command to execute...
                         const reqs = await SERVER.SqlData.ExecuteSQLSync(sql);
 
                         if (reqs.err) {
                             console.log(reqs.err);
                         } else {
-                            if(reqs.rows.affectedRows<1){
-                                console.log('Check the sql!\r\n',sql);
-                            }else{
+                            if (reqs.rows.affectedRows < 1) {
+                                console.log('Check the sql!\r\n', sql);
+                            } else {
                                 console.log("Adding " + asset.Name + " ...");
                             }
                         }
 
-                    }
+                    }//End For all of the AssetsData items...
+
+                    //Finish the promise...
                     resolve(Result);
 
                 })();
@@ -121,6 +126,7 @@ const sqlTableName_assets = "`asset-inventory`.assets";
         const MapASSEETS = await ObjectMapAPI.UpdateAssests(MASTER_MAP_DATA.Assets);
 
         console.log("Looks like we are done! Total Records:" + MapASSEETS.Updated);
+        console.log("The MySQL server needs a lot of work!");
         process.exit(0);
 
 
