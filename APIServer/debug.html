@@ -12,12 +12,17 @@
         Please make sure you open your console window
         to see the results of testing.
     </p>
+
+    <p>
+        If you are looking for the web site/application then 
+        <a href="//demo.johnrnelson.com">click me</a>.
+    </p>
     
 
     <table>
         <tr>
-            <td>Actions</td>
-            <td>Testing Descriptions</td>
+            <td>Testing Actions</td>
+            <td>Descriptions and Expectations</td>
         </tr>
         <tr>
             <td>
@@ -34,7 +39,9 @@
         </tr> 
         <tr>
             <td>
-                <button onclick="ServerAPI.GetDataTest();">Get Data (SQL)</button>                
+                <button onclick="ServerAPI.TEST.GetAllAssets();">Get All Assets (SQL)</button>                
+                <br>
+                <button onclick="ServerAPI.TEST.GetDBStats();">Get DB Stats (SQL)</button>                
             </td>
             <td>Test the new MySQL Server stuff....</td>
         </tr>

@@ -29,8 +29,8 @@ const ServerAPI = {
         ServerAPI.Fetch(`help`, {
             topic: Topic
         })
-            .then(data => {          
-                console.log('This is the help data...',data);
+            .then(data => {
+                console.log('This is the help data...', data);
             }) // JSON-string from `response.json()` call
             .catch(error => {
                 console.error(error);
@@ -44,8 +44,8 @@ const ServerAPI = {
         ServerAPI.Fetch(`dbfolder`, {
             file: 'MasterMap'
         })
-            .then(data => {          
-                console.log('This is the assets data...',data);
+            .then(data => {
+                console.log('This is the assets data...', data);
             }) // JSON-string from `response.json()` call
             .catch(error => {
                 console.error(error);
@@ -53,26 +53,52 @@ const ServerAPI = {
             });
 
     },
-    GetDataTest(OptionsConfig) {
-        if(!OptionsConfig){
+    GetData(OptionsConfig) {
+        if (!OptionsConfig) {
             OptionsConfig = {
-
+                view: 'test'
             };
         }
-        console.info('Requesting the server...',OptionsConfig);
+        console.info('Requesting the server...', OptionsConfig);
 
-        ServerAPI.Fetch(`data`, {
-            OptionsConfig
-        })
-            .then(data => {          
-                console.log('MySQL Data:',data);
+        ServerAPI.Fetch(`data`, OptionsConfig)
+            .then(data => {
+                if (OptionsConfig.OnData) {
+                    OptionsConfig.OnData(null, data);
+                }
+                // console.log('MySQL Data:', data);
             }) // JSON-string from `response.json()` call
             .catch(error => {
-                console.error(error);
+                // console.error(error);
                 debugger;
+                if (OptionsConfig.OnData) {
+                    OptionsConfig.OnData(error, null);
+                }
             });
 
-    }    
+    },
+    TEST: {
+        GetAllAssets() {
+            ServerAPI.GetData({
+                view: 'AllAssets',
+                OnData: function (err, AllData) {
+                    console.log('All Assets via SQL!');
+                    console.log(err, AllData);
+                }
+            });
+        },
+        GetDBStats() {
+            ServerAPI.GetData({
+                view: 'TableTotals',
+                OnData: function (err, AllData) {
+                    console.log('Database stats...!');
+                    console.log(err, AllData);
+                }
+            });
+        }
+
+    }
+
 };
 
 console.info('The API Client has loaded...');
