@@ -62,6 +62,7 @@ const IPC = {
 
         //This happens for local debug...
         request.url = request.url.replace('/api/', '');
+        request.url = request.url.replace('/api', '');
 
         //This happens on the server...
         request.url = request.url.replace('api/', '');
