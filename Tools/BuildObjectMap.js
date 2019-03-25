@@ -259,13 +259,13 @@ ObjectMapAPI.FixAssestTypesData();
 //No longer needed!!!!
 delete ObjectMapData['StudyTags'];
 
-const testData = ObjectMapData['AssetTypes'];
+// const testData = ObjectMapData['AssetTypes'];
 
 // console.log(ObjectMapData);
 // console.log(testData);
 
 
 
-// ObjectMapAPI.SaveData();
+ObjectMapAPI.SaveData();
 
 
