@@ -127,6 +127,8 @@ const IPC = {
                                     error: 'Error in request!',
                                     //  body: body
                                 };
+                                console.log("REQUEST ERROR!");                                
+                                console.log("URL".request.url);
                                 console.log(errEndReq.message);
                                 console.log(body);
                                 // debugger;
