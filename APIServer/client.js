@@ -52,7 +52,27 @@ const ServerAPI = {
                 debugger;
             });
 
-    }
+    },
+    GetDataTest(OptionsConfig) {
+        if(!OptionsConfig){
+            OptionsConfig = {
+
+            };
+        }
+        console.info('Requesting the server...',OptionsConfig);
+
+        ServerAPI.Fetch(`data`, {
+            OptionsConfig
+        })
+            .then(data => {          
+                console.log('MySQL Data:',data);
+            }) // JSON-string from `response.json()` call
+            .catch(error => {
+                console.error(error);
+                debugger;
+            });
+
+    }    
 };
 
 console.info('The API Client has loaded...');

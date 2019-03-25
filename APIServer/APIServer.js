@@ -6,6 +6,8 @@
 
 /*
     Main entry point for the "/api" proxy app.
+
+    http://127.0.0.1:9118
 */
 
 global.SERVER = {
@@ -13,6 +15,8 @@ global.SERVER = {
     RootFolder: __dirname
 }
 
+//Load up our mysql server code....
+SERVER.SqlData = require('../LIB/MySQLData');
 
 
 /*
@@ -39,7 +43,8 @@ const IPC = {
         });
         //Lets start our server
         server.listen(IPC.PORT, IPC.IPADDRESS, function () {
-            console.log("Server listening on: http://" + IPC.IPADDRESS + ":" + IPC.PORT);
+            console.log("Public Server : [" + IPC.IPADDRESS + ":" + IPC.PORT + "] ");
+            console.log("Debug Server: http://127.0.0.1:" + IPC.PORT);
 
         });
 
@@ -128,8 +133,8 @@ const IPC = {
                                     error: 'Error in request!',
                                     //  body: body
                                 };
-                                console.log("REQUEST ERROR!");                                
-                                console.log("URL",request.url);
+                                console.log("REQUEST ERROR!");
+                                console.log("URL", request.url);
                                 console.log(errEndReq.message);
                                 console.log(body);
                                 // debugger;
@@ -182,5 +187,30 @@ const IPC = {
 };
 
 
-//Lets get this party started. :-)
-IPC.Start();
+
+// Async step by step becaues it's easier to debug... They say.. :-)
+(async () => {
+
+    try {
+        const DATA_FOLDER = require("../LIB/DATA_FOLDER");
+
+        /*
+            Open our Mysql server...
+        */
+        const ConfigFileText = fs.readFileSync(DATA_FOLDER.CONFIG_INFO.SecretFolder + "mysql.json", "utf8");
+        const ConfigFileData = JSON.parse(ConfigFileText);
+        const PoolReq = await SERVER.SqlData.OpenPoolSync(ConfigFileData);
+
+
+        //Lets get this party started. :-)
+        IPC.Start();
+
+
+
+    } catch (errorNoSQLServer) {
+        console.log('Critical Error!');
+        console.log(errorNoSQLServer);
+        process.exit(2);
+    }
+
+})();
