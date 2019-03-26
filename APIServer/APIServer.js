@@ -75,52 +75,65 @@ const IPC = {
             the main thread which we need to service the api requests other users
             make on the server...
         */
-        fs.readFile(__dirname + "/debug.html", "utf8", function (err, debugHTML) {
+        fs.readFile(__dirname + "/debug/debug.html", "utf8", function (err, debugHTML) {
             if (err) {
                 SendError('debug.html');
 
             } else {
 
-                fs.readFile(__dirname + "/client.js", "utf8", function (err, clientjs) {
+                fs.readFile(__dirname + "/debug/client.js", "utf8", function (err, clientjs) {
                     if (err) {
                         SendError('client.js');
 
                     } else {
 
-                        fs.readFile(__dirname + "/services/API_HELP.json", "utf8", function (err, API_HELP) {
+                        fs.readFile(__dirname + "/debug/API_HELP.json", "utf8", function (err, API_HELP) {
                             if (err) {
                                 SendError('API_HELP.json');
 
                             } else {
-                       
-                                //  *** SEND THE END RESPONSE!!!!
-                                const debugdata = `
+                                fs.readFile(__dirname + "/debug/debug.css", "utf8", function (err, debugCSS) {
+                                    if (err) {
+                                        SendError('debug.css');
+
+                                    } else {
+                                        //
+                                        
+
+
+
+
+                                        //  *** SEND THE END RESPONSE!!!!
+                                        const debugdata = `
 window.debugdata = {
     port:${IPC.PORT},
     apidata:${API_HELP}
 };
 `+ clientjs;
 
-                                //Our debug HTML is a great way to make sure our stuff works. :-)
-                                debugHTML = debugHTML.replace('//SERVER-SIDE-REPLACE!!!', debugdata);
+                                        //Our debug HTML is a great way to make sure our stuff works. :-)
+                                        debugHTML = debugHTML.replace('//SERVER-SIDE-REPLACE!!!', debugdata);
+                                        debugHTML = debugHTML.replace('/* SERVER REPLACES STYLES */', debugCSS);
 
-                                response.end(debugHTML);
-                                //  *** SEND THE END RESPONSE!!!!
-                                
+                                        response.end(debugHTML);
+                                        //  *** SEND THE END RESPONSE!!!!
+
+
+
+                                    }
+                                });
+
+
+
+
                             }
-                        });
-
-
-
+                        });//End API_HELP data...
                     }
-                });
 
+                });//End Clientside javascript...
             }
-        });
-
-
-
-        //
+        });//end debug html....
+        
     },
 
 
@@ -128,12 +141,12 @@ window.debugdata = {
         Generic error information that any service can call to for dumping
         the data back to the cient as json...
     */
-    SendError(ResponseObject,ErrorInformation){
+    SendError(ResponseObject, ErrorInformation) {
         // debugger;
-        if(typeof(ErrorInformation)=="string"){
+        if (typeof (ErrorInformation) == "string") {
             ResponseObject.end(ErrorInformation);
-        }else{
-            ResponseObject.end(JSON.stringify(ErrorInformation));            
+        } else {
+            ResponseObject.end(JSON.stringify(ErrorInformation));
         }
 
     },
@@ -150,8 +163,8 @@ window.debugdata = {
         }
 
         //Give the response and easy way out for errors...
-        response.SendError=IPC.SendError;
-        
+        response.SendError = IPC.SendError;
+
 
 
         //This should always be local host since it's proxy from NGINX...
@@ -264,10 +277,10 @@ window.debugdata = {
 
 
 
-                    response.SendError(response,{
-                        err:errPUT
+                    response.SendError(response, {
+                        err: errPUT
                     });
-                    
+
                 }
 
 

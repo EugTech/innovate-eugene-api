@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+    integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+
+
+<script>
+//SERVER-SIDE-REPLACE!!!
+</script>
+
+<style>
+    /* SERVER REPLACES STYLES */
+</style>
+
+<body>
+    <div class="container">
+
+        <div class="page-header">
+            <h1>Local debug </h1>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-4">
+                <p>
+                    This is the testing page for the server API.
+                    Please make sure you open your console window
+                    to see the results of testing.
+                </p>
+                <p>
+                    <a href="http://127.0.0.1:9118/">Local Debug</a>
+                    <br>
+                    <a href="http://demo.johnrnelson.com/api">Web Site API Debug</a>
+                </p>
+
+                <p class="test">
+                    If you are looking for the web site/application then
+                    <a href="JavaScript:document.location='/';">click me</a>,
+                    or perhaps you wanted the
+                    <a target="_blank" href="https://github.com/EugTech/innovate-eugene-api">API Github Repo</a>
+                    or the
+                    <a target="_blank" href="https://github.com/EugTech/innovate-eugene-web">Website Github Repo</a>
+                    ?
+                </p>
+                <p>
+
+                </p>
+                <table>
+                    <tr>
+                        <td>API HELP</td>
+                        <td>Descriptions and Expectations</td>
+                    </tr>
+                    <tbody id="DisplayTestingActions">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-8">
+
+                <table>
+                    <tr>
+                        <td>Testing Actions</td>
+                        <td>Descriptions and Expectations</td>
+                    </tr>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <button onclick="ServerAPI.GetHelp();">Get Basic Help</button>
+                                <br>
+                                <button onclick="ServerAPI.GetHelp('listing assests');">Help on listing assests</button>
+                            </td>
+                            <td>Simple help api requests...</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button onclick="ServerAPI.GetDataFolder();">Get Assets</button>
+                            </td>
+                            <td>Fetch the whole data as JSON.</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button onclick="ServerAPI.TEST.GetAllAssets();">Get All Assets (SQL)</button>
+                                <br>
+                                <button onclick="ServerAPI.TEST.GetDBStats();">Get DB Stats (SQL)</button>
+                            </td>
+                            <td>Test the new MySQL Server stuff....</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</body>
+
+</html>

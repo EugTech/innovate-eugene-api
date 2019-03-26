@@ -1,0 +1,23 @@
+{
+    "data": {
+        "test":[
+            {
+                "text":"Get Basic Help",
+                "cmd":"ServerAPI.GetHelp();",
+                "title":"More help",
+            },
+            {
+                "text":"Help on listing assests",
+                "cmd":"ServerAPI.GetHelp('listing assests');",
+                "title":"More help",
+            }
+        ],
+        "notes": "oik"
+    },
+    "help": {
+        "notes": "Help on this system."
+    },
+    "default": {
+        "notes": "do not use me!"
+    }
+}

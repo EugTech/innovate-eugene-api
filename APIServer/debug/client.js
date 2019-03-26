@@ -110,21 +110,54 @@ const ServerAPI = {
 
 };
 
+const DebugUI = {
+    SetHelpTable() {
+        const DisplayTestingActions = document.getElementById("DisplayTestingActions");
+
+        //Clear any old stuff...
+        DisplayTestingActions.innerHTML = "";
+
+        for(var n in debugdata.apidata){
+            const namespace = debugdata.apidata[n];
+            AddTestingRow(n,namespace);
+        }
+      
+
+        function AddTestingRow(NameSpace,RowData) {
+            const rowHTML = `            
+                <td>
+                <b>${NameSpace}</b>
+                </td>
+                <td>${RowData.notes}</td>            
+            `;
+            const TR = document.createElement('tr');
+            TR.innerHTML=rowHTML;
+            DisplayTestingActions.appendChild(TR);
+
+        }
+ 
+
+    }
+};
+
 //After page has loaded...
-window.onload=function(){
-    
+window.onload = function () {
+
 
 
     console.info('The API Client has loaded...');
-    console.info('Feel free to explore this object in the console.', ServerAPI);
+    console.info('Feel free to explore this object in the console.');
     /*
         This is only available to the debug client. We 
         don't put this in normal requests from users... 
     */
     console.info(`
     
+        Use : "ServerAPI" for easy code to help with testing.
         Use : "debugdata" in the console for the api data help.
     
-    `, debugdata);
+    `);
 
-}
+    DebugUI.SetHelpTable();
+
+};
