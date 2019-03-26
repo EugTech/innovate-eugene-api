@@ -5,8 +5,8 @@
 const ServerAPI = {
 
     //Quick and easy way to get data from our api...
-    Fetch(APIType, data = {}) {
-        const url = document.URL + 'api/' + APIType;
+    Fetch(data = {}) {
+        const url = document.URL + 'api/';
 
         return fetch(url, {
             method: "PUT", // *GET, POST, PUT, DELETE, etc.
@@ -26,8 +26,11 @@ const ServerAPI = {
 
     GetHelp(Topic) {
 
-        ServerAPI.Fetch(`help`, {
-            topic: Topic
+        ServerAPI.Fetch({
+            service: 'help',
+            data: {
+                topic: Topic
+            }
         })
             .then(data => {
                 console.log('This is the help data...', data);
@@ -41,8 +44,11 @@ const ServerAPI = {
 
     GetDataFolder(Topic) {
 
-        ServerAPI.Fetch(`dbfolder`, {
-            file: 'MasterMap'
+        ServerAPI.Fetch({
+            service: 'dbfolder',
+            data: {
+                file: 'MasterMap'
+            }
         })
             .then(data => {
                 console.log('This is the assets data...', data);
@@ -55,13 +61,16 @@ const ServerAPI = {
     },
     GetData(OptionsConfig) {
         if (!OptionsConfig) {
-            OptionsConfig = {
-                view: 'test'
+            OptionsConfig = {                
+                data: {
+                    view: 'test'
+                }
             };
         }
+        OptionsConfig.service = "data";
         console.info('Requesting the server...', OptionsConfig);
 
-        ServerAPI.Fetch(`data`, OptionsConfig)
+        ServerAPI.Fetch(OptionsConfig)
             .then(data => {
                 if (OptionsConfig.OnData) {
                     OptionsConfig.OnData(null, data);
@@ -80,7 +89,7 @@ const ServerAPI = {
     TEST: {
         GetAllAssets() {
             ServerAPI.GetData({
-                view: 'AllAssets',
+                view: 'AllAssets',                
                 OnData: function (err, AllData) {
                     console.log('All Assets via SQL!');
                     console.log(err, AllData);

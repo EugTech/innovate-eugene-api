@@ -65,12 +65,14 @@ const IPC = {
         request.HostOrigin = request.headers["origin"];
         request.Host = request.headers["host"];
 
+        /*
         //This happens for local debug...
         request.url = request.url.replace('/api/', '');
         request.url = request.url.replace('/api', '');
 
         //This happens on the server...
         request.url = request.url.replace('api/', '');
+        */
 
         //default to null!
         request.User = {
@@ -117,10 +119,19 @@ const IPC = {
 
                                 request.RequestData = JSON.parse(body);
 
-
-
+                                // debugger;
+                                if(!request.RequestData.service){
+                                    response.end(JSON.stringify({
+                                        err:'No service defined!'
+                                    }));
+                                    return;
+                                }
                                 //Do not allow ".." in the path!!!!
-                                var servicePath = request.url.replace(/\./g, '');
+                                const servicePath = request.RequestData.service.replace(/\./g, '');
+
+
+
+                                // var servicePath = request.url.replace(/\./g, '');
 
 
                                 const finalServicePath = path.resolve(path.join(__dirname, "services", path.normalize(path.join(servicePath, 'index.js'))));
