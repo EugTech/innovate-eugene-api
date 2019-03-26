@@ -4,12 +4,12 @@
             {
                 "text":"Get Basic Help",
                 "cmd":"ServerAPI.GetHelp();",
-                "title":"More help",
+                "title":"More help"
             },
             {
                 "text":"Help on listing assests",
                 "cmd":"ServerAPI.GetHelp('listing assests');",
-                "title":"More help",
+                "title":"More help"
             }
         ],
         "notes": "oik"

@@ -8,6 +8,9 @@
     Main entry point for the "/api" proxy app.
 
     http://127.0.0.1:9118
+
+
+ 
 */
 
 global.SERVER = {
@@ -98,16 +101,17 @@ const IPC = {
 
                                     } else {
                                         //
-                                        
 
 
+                                        const ServerTimeNow = Date();
 
 
                                         //  *** SEND THE END RESPONSE!!!!
                                         const debugdata = `
 window.debugdata = {
     port:${IPC.PORT},
-    apidata:${API_HELP}
+    apidata:${API_HELP},
+    ST:${ServerTimeNow.toLocaleString()}
 };
 `+ clientjs;
 
@@ -133,7 +137,7 @@ window.debugdata = {
                 });//End Clientside javascript...
             }
         });//end debug html....
-        
+
     },
 
 
