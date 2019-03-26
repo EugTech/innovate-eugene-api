@@ -50,6 +50,96 @@ const IPC = {
 
 
     },
+
+    /*
+        This is what you get from the browser....
+    */
+    ServeDebugAPP(request, response) {
+
+        // Special error sending because its HTML not JSON!!
+        function SendError(PageThatFailed) {
+            response.end("Unable to load debug page. " + PageThatFailed + " not found!");
+        }
+
+        /*
+            No matter what they submit.. if it's a GET then they are using a 
+            browser. It's not smart to use GET because of the limitations of 
+            query string values.  :-)
+        */
+        response.writeHead(200, {
+            'Content-Type': 'text/html'
+        });
+
+        /*
+            Sure we are nesting calls.. maybe it looks ugly but its not blocking
+            the main thread which we need to service the api requests other users
+            make on the server...
+        */
+        fs.readFile(__dirname + "/debug.html", "utf8", function (err, debugHTML) {
+            if (err) {
+                SendError('debug.html');
+
+            } else {
+
+                fs.readFile(__dirname + "/client.js", "utf8", function (err, clientjs) {
+                    if (err) {
+                        SendError('client.js');
+
+                    } else {
+
+                        fs.readFile(__dirname + "/services/API_HELP.json", "utf8", function (err, API_HELP) {
+                            if (err) {
+                                SendError('API_HELP.json');
+
+                            } else {
+                       
+                                //  *** SEND THE END RESPONSE!!!!
+                                const debugdata = `
+window.debugdata = {
+    port:${IPC.PORT},
+    apidata:${API_HELP}
+};
+`+ clientjs;
+
+                                //Our debug HTML is a great way to make sure our stuff works. :-)
+                                debugHTML = debugHTML.replace('//SERVER-SIDE-REPLACE!!!', debugdata);
+
+                                response.end(debugHTML);
+                                //  *** SEND THE END RESPONSE!!!!
+                                
+                            }
+                        });
+
+
+
+                    }
+                });
+
+            }
+        });
+
+
+
+        //
+    },
+
+
+    /*
+        Generic error information that any service can call to for dumping
+        the data back to the cient as json...
+    */
+    SendError(ResponseObject,ErrorInformation){
+        // debugger;
+        if(typeof(ErrorInformation)=="string"){
+            ResponseObject.end(ErrorInformation);
+        }else{
+            ResponseObject.end(JSON.stringify(ErrorInformation));            
+        }
+
+    },
+    /*
+        This is the actual method called when a request comes from the server.        
+    */
     ServiceWeb: function (request, response) {
 
 
@@ -59,6 +149,9 @@ const IPC = {
             return;
         }
 
+        //Give the response and easy way out for errors...
+        response.SendError=IPC.SendError;
+        
 
 
         //This should always be local host since it's proxy from NGINX...
@@ -66,11 +159,10 @@ const IPC = {
         request.Host = request.headers["host"];
 
         /*
-        //This happens for local debug...
+        //This happens for local debug but we don't need it now that we don't care about urls...
         request.url = request.url.replace('/api/', '');
         request.url = request.url.replace('/api', '');
-
-        //This happens on the server...
+ 
         request.url = request.url.replace('api/', '');
         */
 
@@ -120,9 +212,9 @@ const IPC = {
                                 request.RequestData = JSON.parse(body);
 
                                 // debugger;
-                                if(!request.RequestData.service){
+                                if (!request.RequestData.service) {
                                     response.end(JSON.stringify({
-                                        err:'No service defined!'
+                                        err: 'No service defined!'
                                     }));
                                     return;
                                 }
@@ -155,37 +247,35 @@ const IPC = {
                     });
                 }
                 catch (errPUT) {
-                    response.end(errPUT.message);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    response.SendError(response,{
+                        err:errPUT
+                    });
+                    
                 }
 
 
                 break
             case "GET":
+                //Any get request they make will be from a browser so just give them the debug page...
+                IPC.ServeDebugAPP(request, response);
 
-                /*
-                    No matter what they submit.. if it's a GET then they are using a 
-                    browser. It's not smart to use GET because of the limitations of 
-                    query string values.  :-)
-                */
-                response.writeHead(200, {
-                    'Content-Type': 'text/html'
-                });
-
-                //This should most definitly not be sync!!!!
-                var debugHTML = fs.readFileSync(__dirname + "/debug.html", "utf8");
-                var clientjs = fs.readFileSync(__dirname + "/client.js", "utf8");
-
-
-                const debugdata = `
-                window.debugdata = {
-                    port:${IPC.PORT}
-                };
-                `+ clientjs;
-
-                //Our debug HTML is a great way to make sure our stuff works. :-)
-                debugHTML = debugHTML.replace('//SERVER-SIDE-REPLACE!!!', debugdata);
-
-                response.end(debugHTML);
                 break;
             default:
                 // debugger;

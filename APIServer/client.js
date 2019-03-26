@@ -1,5 +1,5 @@
 /*
-
+    Simple wrapper to test the API...
 */
 
 const ServerAPI = {
@@ -61,7 +61,7 @@ const ServerAPI = {
     },
     GetData(OptionsConfig) {
         if (!OptionsConfig) {
-            OptionsConfig = {                
+            OptionsConfig = {
                 data: {
                     view: 'test'
                 }
@@ -89,7 +89,7 @@ const ServerAPI = {
     TEST: {
         GetAllAssets() {
             ServerAPI.GetData({
-                view: 'AllAssets',                
+                view: 'AllAssets',
                 OnData: function (err, AllData) {
                     console.log('All Assets via SQL!');
                     console.log(err, AllData);
@@ -110,5 +110,21 @@ const ServerAPI = {
 
 };
 
-console.info('The API Client has loaded...');
-console.info('Feel free to explore this object in the console.', ServerAPI);
+//After page has loaded...
+window.onload=function(){
+    
+
+
+    console.info('The API Client has loaded...');
+    console.info('Feel free to explore this object in the console.', ServerAPI);
+    /*
+        This is only available to the debug client. We 
+        don't put this in normal requests from users... 
+    */
+    console.info(`
+    
+        Use : "debugdata" in the console for the api data help.
+    
+    `, debugdata);
+
+}
