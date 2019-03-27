@@ -34,9 +34,6 @@ run any scripts.
 ** READ THE [README's](Notes)!  :-)
 
 
-Debuging...
-http://0.0.0.0:9118/
-
 
 
 # MySQL 
