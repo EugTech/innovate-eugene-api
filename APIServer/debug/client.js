@@ -134,7 +134,7 @@ const DebugUI = {
             for(var t in RowData.test){
                 const test = RowData.test[t];
                 
-                console.log(test);
+                // console.log(test);
                 
                 const TestActionRow = document.createElement('tr');
                 TestActionRow.title = "NameSpace:" + NameSpace;
@@ -142,8 +142,8 @@ const DebugUI = {
                 const TestActionColA = document.createElement('td');
                 const TestActionColB = document.createElement('td');
 
-                TestActionColA.innerHTML = test.title;
-                TestActionColB.innerHTML = test.text;
+                TestActionColA.innerHTML = test.text;
+                TestActionColB.innerHTML = test.title;
 
                 //Let children reference the test record....
                 TestActionRow.DataRecord = test;
@@ -153,10 +153,12 @@ const DebugUI = {
                 TestActionColB.RowElement = TestActionRow;
 
 
-                //User clicked on me!!!!
+                //User clicked on me!!!! ??
                 TestActionColA.onclick = function(){
                     console.log(this.RowElement);
+                    debugger;
                     console.log(this.RowElement.DataRecord);
+                    window.eval(this.RowElement.DataRecord.cmd);
                     debugger;
                 }
 
