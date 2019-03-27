@@ -117,6 +117,8 @@ const DebugUI = {
 
         //Clear any old stuff...
         DisplayTestingActions.innerHTML = "";
+        
+        // debugger;
 
         for (var n in debugdata.apidata) {
             const namespace = debugdata.apidata[n];
@@ -126,7 +128,7 @@ const DebugUI = {
 
         function AddTestingRow(NameSpace, RowData) {
             
-            debugger;
+        
 
             //for each test record we have....
             for(var t in RowData.test){
