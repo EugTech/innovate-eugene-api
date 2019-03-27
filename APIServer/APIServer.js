@@ -313,9 +313,20 @@ window.debugdata = {
         const ConfigFileData = JSON.parse(ConfigFileText);
         const PoolReq = await SERVER.SqlData.OpenPoolSync(ConfigFileData);
 
+        if (PoolReq.err) {
+            console.log(PoolReq.err);
+            console.log('\r\n\t ****** Check your connection to the server!');
+            
 
-        //Lets get this party started. :-)
-        IPC.Start();
+        } else {
+
+
+            //Lets get this party started. :-)
+            IPC.Start();
+
+        }
+
+
 
 
 

@@ -2,7 +2,7 @@
     Simple wrapper to test the API...
 */
 
- 
+
 const ServerAPI = {
 
     //Quick and easy way to get data from our api...
@@ -117,7 +117,7 @@ const DebugUI = {
 
         //Clear any old stuff...
         DisplayTestingActions.innerHTML = "";
-        
+
         // debugger;
 
         for (var n in debugdata.apidata) {
@@ -127,23 +127,25 @@ const DebugUI = {
 
 
         function AddTestingRow(NameSpace, RowData) {
-            
-        
+
+
 
             //for each test record we have....
-            for(var t in RowData.test){
+            for (var t in RowData.test) {
                 const test = RowData.test[t];
-                
+
                 // console.log(test);
-                
+
                 const TestActionRow = document.createElement('tr');
                 TestActionRow.title = "NameSpace:" + NameSpace;
-                
+
                 const TestActionColA = document.createElement('td');
                 const TestActionColB = document.createElement('td');
 
                 TestActionColA.innerHTML = test.text;
                 TestActionColB.innerHTML = test.title;
+                
+                TestActionColA.className = "buttonclick";
 
                 //Let children reference the test record....
                 TestActionRow.DataRecord = test;
@@ -154,12 +156,17 @@ const DebugUI = {
 
 
                 //User clicked on me!!!! ??
-                TestActionColA.onclick = function(){
-                    console.log(this.RowElement);
-                    debugger;
+                TestActionColA.onclick = function () {
+                    // console.log(this.RowElement);
+                    // debugger;
                     console.log(this.RowElement.DataRecord);
-                    window.eval(this.RowElement.DataRecord.cmd);
-                    debugger;
+                    try {
+                        window.eval(this.RowElement.DataRecord.cmd);
+                    } catch (errEval) {
+                        console.warn('Bad Eval!', errEval);
+                        debugger;
+
+                    }
                 }
 
                 TestActionRow.appendChild(TestActionColA);

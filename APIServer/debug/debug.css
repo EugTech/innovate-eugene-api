@@ -12,3 +12,8 @@
 code {
     white-space: nowrap !important;
 }
+
+.buttonclick {
+    cursor:pointer;
+    color:green;
+}

@@ -37,7 +37,8 @@
         <div class="page-header">
             <h1>Documentation and Debug Utility</h1>
             <p>
-                Use this tool to both get help and test the API.
+                Use this tool to both get help and test the API. Open your console window
+                to really take advantage of this tool.
             </p>
         </div>
 
@@ -51,7 +52,11 @@
                 <br>
                 <a href="#index-curl-examples">Curl Examples</a>
                 <br>
-
+                <p class="HelpText">
+                    <a href="http://127.0.0.1:9118/">Local Debug</a>
+                    <br>
+                    <a href="http://api.innovateeugene.com/api">Web Site API Debug</a>
+                </p>
 
             </div>
 
@@ -65,11 +70,7 @@
                     Please make sure you open your console window
                     to see the results of testing.
                 </p>
-                <p class="HelpText">
-                    <a href="http://127.0.0.1:9118/">Local Debug</a>
-                    <br>
-                    <a href="http://api.innovateeugene.com/api">Web Site API Debug</a>
-                </p>
+
 
                 <p class="HelpText">
                     If you are looking for the web site/application then
@@ -100,28 +101,14 @@
                         <td>Descriptions and Expectations</td>
                     </tr>
                     <tbody>
-                        <tr>
-                            <td>
-                                <button onclick="ServerAPI.GetHelp();">Get Basic Help</button>
-                                <br>
-                                <button onclick="ServerAPI.GetHelp('listing assests');">Help on listing assests</button>
-                            </td>
-                            <td>Simple help api requests...</td>
-                        </tr>
+ 
                         <tr>
                             <td>
                                 <button onclick="ServerAPI.GetDataFolder();">Get Assets</button>
                             </td>
                             <td>Fetch the whole data as JSON.</td>
                         </tr>
-                        <tr>
-                            <td>
-                                <button onclick="ServerAPI.TEST.GetAllAssets();">Get All Assets (SQL)</button>
-                                <br>
-                                <button onclick="ServerAPI.TEST.GetDBStats();">Get DB Stats (SQL)</button>
-                            </td>
-                            <td>Test the new MySQL Server stuff....</td>
-                        </tr>
+ 
                     </tbody>
                 </table>
             </div>
