@@ -111,7 +111,7 @@ const IPC = {
 window.debugdata = {
     port:${IPC.PORT},
     apidata:${API_HELP},
-    ST:'${ServerTimeNow.toLocaleString()}'
+    ST: new Date('${ServerTimeNow.toLocaleString()}')
 };
 `+ clientjs;
 

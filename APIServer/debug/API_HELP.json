@@ -2,6 +2,21 @@
     "data": {
         "test":[
             {
+                "text":"Get All Assets (SQL)",
+                "cmd":"ServerAPI.TEST.GetAllAssets();",
+                "title":"More help"
+            },
+            {
+                "text":"Get DB Stats (SQL)",
+                "cmd":"ServerAPI.TEST.GetDBStats();",
+                "title":"More help"
+            }
+        ],
+        "notes": "Get data from the MySQL server..."
+    },
+    "help": {
+        "test":[
+            {
                 "text":"Get Basic Help",
                 "cmd":"ServerAPI.GetHelp();",
                 "title":"More help"
@@ -11,13 +26,10 @@
                 "cmd":"ServerAPI.GetHelp('listing assests');",
                 "title":"More help"
             }
-        ],
-        "notes": "oik"
-    },
-    "help": {
+        ],        
         "notes": "Help on this system."
     },
     "default": {
-        "notes": "do not use me!"
+        "notes": "Example to use as a template for your next service."
     }
 }

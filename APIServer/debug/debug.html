@@ -32,21 +32,36 @@
         </div>
 
 
-
         <div class="row">
+            <!-- Left panel -->
             <div class="col-md-4">
-                <p>
+
+                <div>Index</div>
+                <a href="#index-top">TOP</a>
+                <br>
+                <a href="#index-curl-examples">Curl Examples</a>
+                <br>
+
+
+            </div>
+
+            <!-- right panel -->
+            <div id="index-top" class="col-md-8">
+
+
+
+                <p class="HelpText">
                     This is the testing page for the server API.
                     Please make sure you open your console window
                     to see the results of testing.
                 </p>
-                <p>
+                <p class="HelpText">
                     <a href="http://127.0.0.1:9118/">Local Debug</a>
                     <br>
                     <a href="http://api.innovateeugene.com/api">Web Site API Debug</a>
                 </p>
 
-                <p class="test">
+                <p class="HelpText">
                     If you are looking for the web site/application then
                     <a href="JavaScript:document.location='/';">click me</a>,
                     or perhaps you wanted the
@@ -55,9 +70,7 @@
                     <a target="_blank" href="https://github.com/EugTech/innovate-eugene-web">Website Github Repo</a>
                     ?
                 </p>
-                <p>
 
-                </p>
                 <table>
                     <tr>
                         <td>API HELP</td>
@@ -67,8 +80,9 @@
 
                     </tbody>
                 </table>
-            </div>
-            <div class="col-md-8">
+
+
+                <hr>
 
                 <table>
                     <tr>
@@ -107,17 +121,13 @@
 
 
 
-        <h2>Some curl Examples</h2>
+        <h2 id="index-curl-examples">Some curl Examples</h2>
 
         <p>Use this to get data from the live server.</p>
-        <pre>
-<code>curl --header "Content-Type: application/json" --request PUT --data '{ "service": "data", "view": "AllAssets" }' http://demo.johnrnelson.com/api</code>
-        </pre>
+        <pre><code>curl --request PUT --data '{ "service": "data", "view": "AllAssets" }' http://api.innovateeugene.com/api</code></pre>
 
         <p>Use this to get data from the your own debug server.</p>
-        <pre>
-<code>curl --header "Content-Type: application/json" --request PUT --data '{ "service": "data", "view": "AllAssets" }' http://localhost:9118/api</code>
-        </pre>
+        <pre><code>curl --request PUT --data '{ "service": "data", "view": "AllAssets" }' http://localhost:9118/api</code></pre>
 
 
     </div>

@@ -1,6 +1,6 @@
 # asset-inventory-openair
 
-CHECK OUT http://api.innovateeugene.com/
+The home of our project is http://api.innovateeugene.com/
 
  
 - [Important](#important) 

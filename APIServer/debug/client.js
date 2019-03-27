@@ -125,6 +125,18 @@ const DebugUI = {
 
 
         function AddTestingRow(NameSpace, RowData) {
+            
+            debugger;
+
+            //for each test record we have....
+            for(var t in RowData.test){
+                const test = RowData.test;
+                console.log(test)
+
+            }
+
+
+
             const rowHTML = `            
                 <td>
                 <b>${NameSpace}</b>

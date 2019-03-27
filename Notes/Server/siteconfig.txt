@@ -1,0 +1,62 @@
+# Default server configuration
+#
+upstream webserverapi {
+        server 127.0.0.1:9118; # appserver_ip:ws_port
+}
+
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	# root /var/www/html;
+	root /home/webdev/innovate-eugene-web/public;
+
+	# Setup your error pages...	
+	error_page 404 /404.html;
+	location = /404.html {
+                root /home/webdev/www/errors;
+                internal;
+        }
+	error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+                root /home/webdev/www/errors;
+                internal;
+        }
+
+
+
+	# set our default index page...
+	index index.html index.htm;
+
+	server_name _;
+
+	location / {
+		# First attempt to serve request as file, then
+		# as directory, then fall back to displaying a 404.
+		try_files $uri $uri/ =404;
+	}
+
+	# deny access to .htaccess files, if Apache's document root
+	# concurs with nginx's one
+	#
+	#location ~ /\.ht {
+	#	deny all;
+	#}
+
+    proxy_intercept_errors on;
+
+        location /api {
+            proxy_pass http://webserverapi;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_cache_bypass $http_upgrade;
+
+            proxy_connect_timeout 2d;
+            proxy_send_timeout 2d;
+            proxy_read_timeout 2d;
+        }       
+
+}

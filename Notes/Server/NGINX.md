@@ -1,6 +1,19 @@
- 
 # NGINX
-This is the file server used.
+This is the web/file server used. Check out the siteconfig file
+to see an example of how to set it up.
+
+# HTTPS
+The domain we use is `api.innovateeugene.com` so get a SSL cert 
+for free from https://letsencrypt.org and use that.
+
+The Certbot is the tool to get the certs so read up on this 
+at https://certbot.eff.org/lets-encrypt/debianstretch-nginx
+and use cron when ready for production.
+
+Log files are at /var/log/letsencrypt/letsencrypt.log
+
+
+
 
 
 ## Linux
@@ -35,4 +48,6 @@ Use this after you make changes to NGINX config files.
 The best way to make sure your changes are set is to do this...
 
     sudo service nginx restart
+
+
 
