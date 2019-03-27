@@ -2,3 +2,6 @@
     color:gray;
 }
 
+code {
+    white-space: nowrap !important;
+}

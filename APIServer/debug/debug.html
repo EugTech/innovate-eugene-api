@@ -32,6 +32,7 @@
         </div>
 
 
+
         <div class="row">
             <div class="col-md-4">
                 <p>
@@ -102,8 +103,24 @@
             </div>
         </div>
 
-    </div>
 
+
+
+
+        <h2>Some curl Examples</h2>
+
+        <p>Use this to get data from the live server.</p>
+        <pre>
+<code>curl --header "Content-Type: application/json" --request PUT --data '{ "service": "data", "view": "AllAssets" }' http://demo.johnrnelson.com/api</code>
+        </pre>
+
+        <p>Use this to get data from the your own debug server.</p>
+        <pre>
+<code>curl --header "Content-Type: application/json" --request PUT --data '{ "service": "data", "view": "AllAssets" }' http://localhost:9118/api</code>
+        </pre>
+
+
+    </div>
 
 
 </body>

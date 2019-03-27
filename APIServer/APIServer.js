@@ -111,7 +111,7 @@ const IPC = {
 window.debugdata = {
     port:${IPC.PORT},
     apidata:${API_HELP},
-    ST:${ServerTimeNow.toLocaleString()}
+    ST:'${ServerTimeNow.toLocaleString()}'
 };
 `+ clientjs;
 
@@ -226,7 +226,16 @@ window.debugdata = {
                                 const url = require('url');
                                 const path = require('path');
 
-                                request.RequestData = JSON.parse(body);
+                                try {
+                                    request.RequestData = JSON.parse(body);
+
+                                } catch (badJSON) {
+
+                                    response.SendError(response, {
+                                        err: badJSON
+                                    });
+
+                                }
 
                                 // debugger;
                                 if (!request.RequestData.service) {
@@ -264,21 +273,6 @@ window.debugdata = {
                     });
                 }
                 catch (errPUT) {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                     response.SendError(response, {

@@ -2,6 +2,7 @@
     Simple wrapper to test the API...
 */
 
+ 
 const ServerAPI = {
 
     //Quick and easy way to get data from our api...
@@ -117,13 +118,13 @@ const DebugUI = {
         //Clear any old stuff...
         DisplayTestingActions.innerHTML = "";
 
-        for(var n in debugdata.apidata){
+        for (var n in debugdata.apidata) {
             const namespace = debugdata.apidata[n];
-            AddTestingRow(n,namespace);
+            AddTestingRow(n, namespace);
         }
-      
 
-        function AddTestingRow(NameSpace,RowData) {
+
+        function AddTestingRow(NameSpace, RowData) {
             const rowHTML = `            
                 <td>
                 <b>${NameSpace}</b>
@@ -131,11 +132,11 @@ const DebugUI = {
                 <td>${RowData.notes}</td>            
             `;
             const TR = document.createElement('tr');
-            TR.innerHTML=rowHTML;
+            TR.innerHTML = rowHTML;
             DisplayTestingActions.appendChild(TR);
 
         }
- 
+
 
     }
 };
