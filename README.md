@@ -58,9 +58,7 @@ Example:
 ## TODO
 This is quick running to do list of items that should be moved to the github issues list.
 
-- [x] Created project and have tested and provable code.
-- [x] Support other spreadsheet type services.
-- [x] Move code to Eugene Tech github.
-- [x] Get server hosting? 
-- [ ] Connect github repo for the client UI. 
-- [ ] Build SQL tables for the airtable data.
+- [x] Update Issues!
+- [ ] Document API
+- [ ] Build SQL tables 
+- [ ] Sync Airtable data  

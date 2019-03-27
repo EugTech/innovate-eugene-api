@@ -130,22 +130,52 @@ const DebugUI = {
 
             //for each test record we have....
             for(var t in RowData.test){
-                const test = RowData.test;
-                console.log(test)
+                const test = RowData.test[t];
+                
+                console.log(test);
+                
+                const TestActionRow = document.createElement('tr');
+                TestActionRow.title = "NameSpace:" + NameSpace;
+                
+                const TestActionColA = document.createElement('td');
+                const TestActionColB = document.createElement('td');
+
+                TestActionColA.innerHTML = test.title;
+                TestActionColB.innerHTML = test.text;
+
+                //Let children reference the test record....
+                TestActionRow.DataRecord = test;
+
+                //Set DOM links for easy scripting access....
+                TestActionColA.RowElement = TestActionRow;
+                TestActionColB.RowElement = TestActionRow;
+
+
+                //User clicked on me!!!!
+                TestActionColA.onclick = function(){
+                    console.log(this.RowElement);
+                    console.log(this.RowElement.DataRecord);
+                    debugger;
+                }
+
+                TestActionRow.appendChild(TestActionColA);
+                TestActionRow.appendChild(TestActionColB);
+                DisplayTestingActions.appendChild(TestActionRow);
+
 
             }
 
 
 
-            const rowHTML = `            
-                <td>
-                <b>${NameSpace}</b>
-                </td>
-                <td>${RowData.notes}</td>            
-            `;
-            const TR = document.createElement('tr');
-            TR.innerHTML = rowHTML;
-            DisplayTestingActions.appendChild(TR);
+            // const rowHTML = `            
+            //     <td>
+            //     <b>${NameSpace}</b>
+            //     </td>
+            //     <td>${RowData.notes}</td>            
+            // `;
+            // const TR = document.createElement('tr');
+            // TR.innerHTML = rowHTML;
+            // DisplayTestingActions.appendChild(TR);
 
         }
 
