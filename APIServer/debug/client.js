@@ -229,7 +229,7 @@ const DebugUI = {
         AddInfoElement('Host', 'The hostname of this server',
             '' + window.location.hostname + '');
 
-    }
+    } 
 };
 
 //After page has loaded...

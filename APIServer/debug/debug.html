@@ -11,7 +11,7 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        
+
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
@@ -42,55 +42,37 @@
 <body>
 
 
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">GitHub</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Admin</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="JavaScript:console.log('Show UI for [Assets]');">Assets</a>
+                        <a class="dropdown-item" href="JavaScript:console.log('Show UI for [Entities]');">Entities</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="JavaScript:console.log('Show UI for [Help]');">Help</a>
+                    </div>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
 
     <div class="container">
-
-
-
-
-
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </div>
-        </nav>
-
-
-
-
-
 
 
 
@@ -104,74 +86,57 @@
 
 
         <div class="page-header">
-            <h1>Documentation and Debug Utility</h1>
+            <h1>Documentation and Debug Utilityx</h1>
 
         </div>
+        <div class="alert alert-info" role="alert">
+            Use this tool to both get help and test the API.
+            <b>Open your browser window console to really take advantage of this tool.</b>
+        </div>
+
         <p class="HelpText">
-            Use this tool to both get help and test the API. <b>Open your browser window
-                console to really take advantage of this tool.</b>
+            <div class="alert alert-primary" role="alert">
+                This is actually the API. Seriously!
+            </div>
+
         </p>
 
 
 
 
+        <table width="100%">
+            <tr>
+                <td width="20%" class="TableHeader">API HELP</td>
+                <td width="80%" class="TableHeader">Descriptions and Expectations</td>
+            </tr>
+            <tbody id="DisplayTestingActions">
 
-        <div class="row">
-            <!-- Left panel -->
-            <div class="col-md-2">
-
-                <div>Index</div>
-
-                xxxxxxx
-
-            </div>
-
-            <!-- right panel -->
-            <div id="index-top" class="col-md-10">
+            </tbody>
+        </table>
 
 
-                <table width="100%">
-                    <tr>
-                        <td>API HELP</td>
-                        <td>Descriptions and Expectations</td>
-                    </tr>
-                    <tbody id="DisplayTestingActions">
+        <hr>
 
-                    </tbody>
-                </table>
-
-
-                <hr>
-
-                <div id="DisplayTestingResults"></div>
-                <div id="DisplayTestingHelp"></div>
+        <div id="DisplayTestingResults"></div>
+        <div id="DisplayTestingHelp"></div>
 
 
 
 
-                <h2 id="index-curl-examples">Some curl Examples</h2>
+        <h2 id="index-curl-examples">Some curl Examples</h2>
 
-                <p>Use this to get data from the live server. Notice that the actuall HTTP verb is not
-                    important.</p>
-                <pre><code>curl --request GET --data '{ "service": "data", "view": "AllAssets" }' https://api.innovateeugene.com/api</code></pre>
-                <pre><code>curl --request POST --data '{ "service": "data", "view": "AllAssets" }' https://api.innovateeugene.com/api</code></pre>
-                <pre><code>curl --request POST --data '{ "service": "data", "view": "AllAssets" }' https://api.innovateeugene.com/api</code></pre>
-
-
-                <p class="HelpText">
-                    Use this to get data from the your own debug server.
-                </p>
-
-                <pre><code>curl --request GET --data '{ "service": "data", "view": "AllAssets" }' http://localhost:9118/api</code></pre>
+        <p class="HelpText">Use this to get data from the live server. Notice that the actuall HTTP verb is not
+            important.</p>
+        <pre><code>curl --request GET --data '{ "service": "data", "view": "AllAssets" }' https://api.innovateeugene.com/api</code></pre>
+        <pre><code>curl --request POST --data '{ "service": "data", "view": "AllAssets" }' https://api.innovateeugene.com/api</code></pre>
+        <pre><code>curl --request POST --data '{ "service": "data", "view": "AllAssets" }' https://api.innovateeugene.com/api</code></pre>
 
 
+        <p class="HelpText">
+            Use this to get data from the your own debug server.
+        </p>
 
-
-
-            </div>
-        </div>
-
-
+        <pre><code>curl --request GET --data '{ "service": "data", "view": "AllAssets" }' http://localhost:9118/api</code></pre>
 
 
         <!-- footer -->
