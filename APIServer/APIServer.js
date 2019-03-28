@@ -13,6 +13,8 @@
  
 */
 
+
+//Yes.. it's a global!!! 
 global.SERVER = {
     Started: new Date(),
     RootFolder: __dirname
@@ -23,10 +25,9 @@ SERVER.SqlData = require('../LIB/MySQLData');
 
 
 /*
-    Get the appinfo from the `package.json` file and 
-    add any "extra" info the app needs to survive... :-) 
+    We will need access to the disk, so load up the libraries 
+    needed in nodejs and get what you need....
 */
-
 const fs = require('fs');
 const path = require('path');
 
@@ -35,27 +36,34 @@ const path = require('path');
     Basic TCP/IP server that will route requests for us...
 */
 const IPC = {
-    PORT: 9118,
-    // IPADDRESS: '127.0.0.1',
-    IPADDRESS: '0.0.0.0',
+    PORT: 9118,                 // Selected port because 80 and 443 are normally used for webby stuff. 
+    // IPADDRESS: '127.0.0.1',  // Localhost is a safe play!    
+    IPADDRESS: '0.0.0.0',       // This binds us to any NIC on the server. Becareful with this!!!
+
+    /*
+        Create a basic HTTP server and service it's requests. Nothing fancy needed here. 
+
+        The easier you make this code the less headaches your gonna have debugging. :-)
+    */
     Start: function () {
 
         var http = require('http');
         var server = http.createServer(function (requset, response) {
             IPC.ServiceWeb(requset, response);
         });
-        //Lets start our server
+        //Lets start our server..
         server.listen(IPC.PORT, IPC.IPADDRESS, function () {
             console.log("Public Server : [" + IPC.IPADDRESS + ":" + IPC.PORT + "] ");
             console.log("Debug Server: http://127.0.0.1:" + IPC.PORT);
-
         });
 
 
     },
 
+
     /*
-        This is what you get from the browser....
+        This is what you get from the browser when you are looking for help or 
+        debugging. By the time you do this the client is assumed to be a browser.
     */
     ServeDebugAPP(request, response) {
 
@@ -155,7 +163,10 @@ window.debugdata = {
 
     },
     /*
-        This is the actual method called when a request comes from the server.        
+        This is the actual method called when a request comes from the server. 
+        
+        Use this chance to build state and enforce rules that you expect all 
+        of your clients to follow. 
     */
     ServiceWeb: function (request, response) {
 
@@ -169,19 +180,10 @@ window.debugdata = {
         //Give the response and easy way out for errors...
         response.SendError = IPC.SendError;
 
-
-
         //This should always be local host since it's proxy from NGINX...
         request.HostOrigin = request.headers["origin"];
         request.Host = request.headers["host"];
 
-        /*
-        //This happens for local debug but we don't need it now that we don't care about urls...
-        request.url = request.url.replace('/api/', '');
-        request.url = request.url.replace('/api', '');
- 
-        request.url = request.url.replace('api/', '');
-        */
 
         //default to null!
         request.User = {
@@ -194,9 +196,6 @@ window.debugdata = {
 
         // Use this only when you need to!!!
         // console.log('Serving User:',request.User);
-
- 
-
 
 
         try {
@@ -238,19 +237,16 @@ window.debugdata = {
                         }
 
                         // debugger;
-                        if (!request.RequestData.service) {                            
+                        if (!request.RequestData.service) {
                             response.end(JSON.stringify({
                                 err: 'No service defined!'
                             }));
                             return;
                         }
+
+
                         //Do not allow ".." in the path!!!!
                         const servicePath = request.RequestData.service.replace(/\./g, '');
-
-
-
-                        // var servicePath = request.url.replace(/\./g, '');
-
 
                         const finalServicePath = path.resolve(path.join(__dirname, "services", path.normalize(path.join(servicePath, 'index.js'))));
 
@@ -258,14 +254,17 @@ window.debugdata = {
                         route2Take.ServiceRequest(request, response);
                     }
                     catch (errEndReq) {
+
+
+                        //Give the client some idea of what went wrong...
                         var resp = {
-                            error: 'Error in request!',
-                            //  body: body
+                            msg: 'Error in request!',
+                            err: errEndReq
                         };
-                        console.log("REQUEST ERROR!");
-                        console.log("URL", request.url);
-                        console.log(errEndReq.message);
-                        console.log(body);
+                        // console.log("REQUEST ERROR!");
+                        // console.log("URL", request.url);
+                        // console.log(errEndReq.message);
+                        // console.log(body);
                         // debugger;
                         response.end(JSON.stringify(resp));
                     }
@@ -273,24 +272,16 @@ window.debugdata = {
             });
         }
         catch (errPUT) {
-
-
+            //Some bad juju happend so we just pass it off to our generic error handler...
             response.SendError(response, {
                 err: errPUT
             });
-
-        }        
-
+        }//End Reading Request... 
 
 
 
 
-
-
-
-
-
-    }
+    }//End Service Web Request...
 };
 
 
@@ -311,7 +302,7 @@ window.debugdata = {
         if (PoolReq.err) {
             console.log(PoolReq.err);
             console.log('\r\n\t ****** Check your connection to the server!');
-            
+
 
         } else {
 

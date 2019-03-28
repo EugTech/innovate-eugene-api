@@ -13,9 +13,6 @@ and use cron when ready for production.
 Log files are at /var/log/letsencrypt/letsencrypt.log
 
 
-
-
-
 ## Linux
 On the main server insatll it this way.
 
