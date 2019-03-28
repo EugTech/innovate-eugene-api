@@ -16,7 +16,7 @@ Please see the [asset-inventory](https://github.com/EugTech/asset-inventory) pro
 
 
 
-This is still a work in progress. Time line is Monday March 18th.
+This is still a work in progress. 
 
 
 
@@ -59,5 +59,14 @@ This is quick running to do list of items that should be moved to the github iss
 - [ ] Document API
 - [ ] Build SQL tables 
 - [ ] Sync Airtable data  
+
+
+# Testing the API
+
+Checkout [API Tester](https://www.apitester.com/)
+
+
+Use the enpoint `https://api.innovateeugene.com/api` and the request body of `{"service":"data","view":"AllAssets"}` .
+
 
 

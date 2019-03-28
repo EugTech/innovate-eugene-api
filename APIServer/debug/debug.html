@@ -36,11 +36,21 @@
 
         <div class="page-header">
             <h1>Documentation and Debug Utility</h1>
-            <p>
-                Use this tool to both get help and test the API. Open your console window
-                to really take advantage of this tool.
-            </p>
+
         </div>
+        <p class="HelpText">
+            Use this tool to both get help and test the API. <b>Open your browser window
+                console to really take advantage of this tool.</b>
+        </p>
+        <p class="HelpText">
+            If you are looking for the web site/application then
+            <a href="JavaScript:document.location='/';">click me</a>,
+            or perhaps you wanted the
+            <a target="_blank" href="https://github.com/EugTech/innovate-eugene-api">API Github Repo</a>
+            or the
+            <a target="_blank" href="https://github.com/EugTech/innovate-eugene-web">Website Github Repo</a>
+            ?
+        </p>
 
 
         <div class="row">
@@ -64,24 +74,6 @@
             <div id="index-top" class="col-md-8">
 
 
-
-                <p class="HelpText">
-                    This is the testing page for the server API.
-                    Please make sure you open your console window
-                    to see the results of testing.
-                </p>
-
-
-                <p class="HelpText">
-                    If you are looking for the web site/application then
-                    <a href="JavaScript:document.location='/';">click me</a>,
-                    or perhaps you wanted the
-                    <a target="_blank" href="https://github.com/EugTech/innovate-eugene-api">API Github Repo</a>
-                    or the
-                    <a target="_blank" href="https://github.com/EugTech/innovate-eugene-web">Website Github Repo</a>
-                    ?
-                </p>
-
                 <table width="100%">
                     <tr>
                         <td>API HELP</td>
@@ -95,22 +87,9 @@
 
                 <hr>
 
-                <table>
-                    <tr>
-                        <td>Testing Actions</td>
-                        <td>Descriptions and Expectations</td>
-                    </tr>
-                    <tbody>
- 
-                        <tr>
-                            <td>
-                                <button onclick="ServerAPI.GetDataFolder();">Get Assets</button>
-                            </td>
-                            <td>Fetch the whole data as JSON.</td>
-                        </tr>
- 
-                    </tbody>
-                </table>
+                <div id="DisplayTestingResults"></div>
+
+
             </div>
         </div>
 
@@ -120,11 +99,13 @@
 
         <h2 id="index-curl-examples">Some curl Examples</h2>
 
-        <p>Use this to get data from the live server.</p>
-        <pre><code>curl --request PUT --data '{ "service": "data", "view": "AllAssets" }' https://api.innovateeugene.com/api</code></pre>
+        <p>Use this to get data from the live server. Notice that the actuall HTTP verb is not important.</p>
+        <pre><code>curl --request GET --data '{ "service": "data", "view": "AllAssets" }' https://api.innovateeugene.com/api</code></pre>
+        <pre><code>curl --request POST --data '{ "service": "data", "view": "AllAssets" }' https://api.innovateeugene.com/api</code></pre>
+        <pre><code>curl --request POST --data '{ "service": "data", "view": "AllAssets" }' https://api.innovateeugene.com/api</code></pre>
 
         <p>Use this to get data from the your own debug server.</p>
-        <pre><code>curl --request PUT --data '{ "service": "data", "view": "AllAssets" }' http://localhost:9118/api</code></pre>
+        <pre><code>curl --request GET --data '{ "service": "data", "view": "AllAssets" }' http://localhost:9118/api</code></pre>
 
 
     </div>

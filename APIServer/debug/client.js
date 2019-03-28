@@ -5,6 +5,7 @@
 
 const ServerAPI = {
 
+
     //Quick and easy way to get data from our api...
     Fetch(data = {}) {
         const url = document.URL + 'api/';
@@ -62,6 +63,7 @@ const ServerAPI = {
     },
     GetData(OptionsConfig) {
         if (!OptionsConfig) {
+            //Put in a default if they are just playing around...
             OptionsConfig = {
                 data: {
                     view: 'test'
@@ -69,7 +71,6 @@ const ServerAPI = {
             };
         }
         OptionsConfig.service = "data";
-        console.info('Requesting the server...', OptionsConfig);
 
         ServerAPI.Fetch(OptionsConfig)
             .then(data => {
@@ -92,8 +93,13 @@ const ServerAPI = {
             ServerAPI.GetData({
                 view: 'AllAssets',
                 OnData: function (err, AllData) {
-                    console.log('All Assets via SQL!');
-                    console.log(err, AllData);
+                    if (err) {
+                        console.warn('Error in API!', err);
+                    } else {
+                        console.log('All Assets via SQL!');
+                        console.log(AllData);
+                    }
+
                 }
             });
         },
@@ -101,8 +107,13 @@ const ServerAPI = {
             ServerAPI.GetData({
                 view: 'TableTotals',
                 OnData: function (err, AllData) {
-                    console.log('Database stats...!');
-                    console.log(err, AllData);
+                    if (err) {
+                        console.warn('Error in API!', err);
+                    } else {
+                        console.log('Database stats...!');
+                        console.log(AllData);
+                    }
+
                 }
             });
         }
@@ -112,11 +123,14 @@ const ServerAPI = {
 };
 
 const DebugUI = {
+
     SetHelpTable() {
-        const DisplayTestingActions = document.getElementById("DisplayTestingActions");
+        DebugUI.DisplayTestingActions = document.getElementById("DisplayTestingActions");
+        DebugUI.DisplayTestingResults = document.getElementById("DisplayTestingResults");
+
 
         //Clear any old stuff...
-        DisplayTestingActions.innerHTML = "";
+        DebugUI.DisplayTestingActions.innerHTML = "";
 
         // debugger;
 
@@ -144,7 +158,7 @@ const DebugUI = {
 
                 TestActionColA.innerHTML = test.text;
                 TestActionColB.innerHTML = test.title;
-                
+
                 TestActionColA.className = "buttonclick";
 
                 //Let children reference the test record....
@@ -171,7 +185,7 @@ const DebugUI = {
 
                 TestActionRow.appendChild(TestActionColA);
                 TestActionRow.appendChild(TestActionColB);
-                DisplayTestingActions.appendChild(TestActionRow);
+                DebugUI.DisplayTestingActions.appendChild(TestActionRow);
 
 
             }
@@ -186,7 +200,7 @@ const DebugUI = {
             // `;
             // const TR = document.createElement('tr');
             // TR.innerHTML = rowHTML;
-            // DisplayTestingActions.appendChild(TR);
+            // DebugUI.DisplayTestingActions.appendChild(TR);
 
         }
 
