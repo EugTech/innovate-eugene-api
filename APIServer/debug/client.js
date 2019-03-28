@@ -214,22 +214,20 @@ const DebugUI = {
     //Show the server info via HTML in a componet fashion....
     SetSysInfo() {
         const SystemInfo = document.getElementById("SystemInfo");
-        const HeaderInfo = document.createElement("div");
 
-        HeaderInfo.innerHTML = "System Information";
-        SystemInfo.appendChild(HeaderInfo);
-
+        //Setup a simple function to add html to our DOM... super simple!!!!!!!!!
         function AddInfoElement(InfoText, InfoTip, ElementData) {
             const NewEL = document.createElement('div');
             NewEL.innerHTML = '<b>' + InfoText + '</b> : ' + ElementData;
             NewEL.title = InfoTip;
+            NewEL.className = "FooterSysInfo";
             SystemInfo.appendChild(NewEL);
         }
 
+        AddInfoElement('Server Birth', 'The date the server started', debugdata.ST.toLocaleDateString() + " " + debugdata.ST.toLocaleTimeString());
         AddInfoElement('Port', 'APIServer TCP/IP Port', debugdata.port);
-
-        const ServerBirthDate = debugdata.ST.toLocaleDateString() + " " + debugdata.ST.toLocaleTimeString(); 
-        AddInfoElement('Server Birth', 'The date the server started', ServerBirthDate);
+        AddInfoElement('Host', 'The hostname of this server',
+            '' + window.location.hostname + '');
 
     }
 };

@@ -14,6 +14,31 @@ code {
 }
 
 .buttonclick {
-    cursor:pointer;
-    color:green;
+    cursor: pointer;
+    color: green;
+}
+
+/* 
+FOOTER STYLES!!!!!! 
+*/
+
+.footer-row {
+    padding-top: 50px;
+    margin-bottom: 100px;
+}
+
+.FooterHeading {
+    color: green;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.FooterSysInfo {
+    color: gray;
+    cursor: default;
+}
+
+.FooterSysInfo:hover {
+    color: silver !important;
+    cursor: hand;
 }
