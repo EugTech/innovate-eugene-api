@@ -52,12 +52,9 @@ const IPC = {
             IPC.ServiceWeb(requset, response);
         });
         //Lets start our server..
-        server.listen(IPC.PORT, IPC.IPADDRESS, function () {
-            console.log("Public Server : [" + IPC.IPADDRESS + ":" + IPC.PORT + "] ");
-            console.log("Debug Server: http://127.0.0.1:" + IPC.PORT);
+        server.listen(IPC.PORT, IPC.IPADDRESS, function () {            
+            console.log("Web Server Ready : http://" + IPC.IPADDRESS + ":" + IPC.PORT);
         });
-
-
     },
 
 
@@ -311,10 +308,6 @@ window.debugdata = {
             IPC.Start();
 
         }
-
-
-
-
 
     } catch (errorNoSQLServer) {
         console.log('Critical Error!');

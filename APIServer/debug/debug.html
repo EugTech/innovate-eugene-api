@@ -53,9 +53,12 @@
         </p>
 
 
+
+
+
         <div class="row">
             <!-- Left panel -->
-            <div class="col-md-4">
+            <div class="col-md-2">
 
                 <div>Index</div>
                 <a href="#index-top">TOP</a>
@@ -71,7 +74,7 @@
             </div>
 
             <!-- right panel -->
-            <div id="index-top" class="col-md-8">
+            <div id="index-top" class="col-md-10">
 
 
                 <table width="100%">
@@ -88,6 +91,24 @@
                 <hr>
 
                 <div id="DisplayTestingResults"></div>
+                <div id="DisplayTestingHelp"></div>
+
+
+
+
+                <h2 id="index-curl-examples">Some curl Examples</h2>
+
+                <p>Use this to get data from the live server. Notice that the actuall HTTP verb is not
+                    important.</p>
+                <pre><code>curl --request GET --data '{ "service": "data", "view": "AllAssets" }' https://api.innovateeugene.com/api</code></pre>
+                <pre><code>curl --request POST --data '{ "service": "data", "view": "AllAssets" }' https://api.innovateeugene.com/api</code></pre>
+                <pre><code>curl --request POST --data '{ "service": "data", "view": "AllAssets" }' https://api.innovateeugene.com/api</code></pre>
+
+                <p>Use this to get data from the your own debug server.</p>
+                <pre><code>curl --request GET --data '{ "service": "data", "view": "AllAssets" }' http://localhost:9118/api</code></pre>
+
+
+
 
 
             </div>
@@ -96,16 +117,20 @@
 
 
 
+        <div class="row">
+            <!-- footer -->
+            <div id="SystemInfo" class="col-md-4">              
+            </div>
 
-        <h2 id="index-curl-examples">Some curl Examples</h2>
+            <div class="col-md-4">
+                Application Information
+            </div>
+            <div class="col-md-4">
+                HelpFul Links
+            </div>
+        </div>
 
-        <p>Use this to get data from the live server. Notice that the actuall HTTP verb is not important.</p>
-        <pre><code>curl --request GET --data '{ "service": "data", "view": "AllAssets" }' https://api.innovateeugene.com/api</code></pre>
-        <pre><code>curl --request POST --data '{ "service": "data", "view": "AllAssets" }' https://api.innovateeugene.com/api</code></pre>
-        <pre><code>curl --request POST --data '{ "service": "data", "view": "AllAssets" }' https://api.innovateeugene.com/api</code></pre>
 
-        <p>Use this to get data from the your own debug server.</p>
-        <pre><code>curl --request GET --data '{ "service": "data", "view": "AllAssets" }' http://localhost:9118/api</code></pre>
 
 
     </div>

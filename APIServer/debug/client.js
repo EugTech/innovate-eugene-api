@@ -127,6 +127,11 @@ const DebugUI = {
     SetHelpTable() {
         DebugUI.DisplayTestingActions = document.getElementById("DisplayTestingActions");
         DebugUI.DisplayTestingResults = document.getElementById("DisplayTestingResults");
+        DebugUI.DisplayTestingHelp = document.getElementById("DisplayTestingHelp");
+
+
+        DebugUI.DisplayTestingResults.innerHTML = "Ready to display testing results!"
+        DebugUI.DisplayTestingHelp.innerHTML = "Ready to display dynamic api help..."
 
 
         //Clear any old stuff...
@@ -205,6 +210,27 @@ const DebugUI = {
         }
 
 
+    },
+    //Show the server info via HTML in a componet fashion....
+    SetSysInfo() {
+        const SystemInfo = document.getElementById("SystemInfo");
+        const HeaderInfo = document.createElement("div");
+
+        HeaderInfo.innerHTML = "System Information";
+        SystemInfo.appendChild(HeaderInfo);
+
+        function AddInfoElement(InfoText, InfoTip, ElementData) {
+            const NewEL = document.createElement('div');
+            NewEL.innerHTML = '<b>' + InfoText + '</b> : ' + ElementData;
+            NewEL.title = InfoTip;
+            SystemInfo.appendChild(NewEL);
+        }
+
+        AddInfoElement('Port', 'APIServer TCP/IP Port', debugdata.port);
+
+        const ServerBirthDate = debugdata.ST.toLocaleDateString() + " " + debugdata.ST.toLocaleTimeString(); 
+        AddInfoElement('Server Birth', 'The date the server started', ServerBirthDate);
+
     }
 };
 
@@ -227,5 +253,6 @@ window.onload = function () {
     `);
 
     DebugUI.SetHelpTable();
+    DebugUI.SetSysInfo();
 
 };
