@@ -9,11 +9,54 @@
     font-size: 14px;
 }
 
-code {
+pre {
+    margin: 5px;
+    padding: 25px;      
+    background-color: rgb(238, 238, 238);
+}
+pre code {
+
     white-space: nowrap !important;
+    
 }
 
 .buttonclick {
-    cursor:pointer;
-    color:green;
+    cursor: pointer;
+    color: green;
+}
+
+.todo-item {
+    color: green;
+    font-size: 12px;
+}
+
+/* 
+FOOTER STYLES!!!!!! 
+*/
+
+.footer-row {
+    padding-top: 50px;
+    margin-bottom: 100px;
+}
+
+.FooterHeading {
+    color: green;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.FooterSysInfo {
+    color: gray;
+    cursor: default;
+}
+
+.FooterSysInfo:hover {
+    color: silver !important;
+    cursor: hand;
+}
+
+.TableHeader {
+    color: purple;
+    font-size: 18px;
+    font-weight: bold;
 }
