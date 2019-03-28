@@ -195,106 +195,101 @@ window.debugdata = {
         // Use this only when you need to!!!
         // console.log('Serving User:',request.User);
 
+ 
 
-        // How did they try to get to the server?
-        switch (request.method.toUpperCase()) {
-            case "POST":
-            case "PUT":
-                try {
 
-                    var body = '';
-                    request.on('data', function (data) {
-                        body += data;
-                        // Too much POST data, kill the connection!
-                        if (body.length > 1e6) response.connection.destroy();
+
+        try {
+
+            var body = '';
+            request.on('data', function (data) {
+                body += data;
+                // Too much POST data, kill the connection!
+                if (body.length > 1e6) response.connection.destroy();
+            });
+
+
+            request.on('end', function () {
+                if (body == '') {
+                    // response.end();
+                    IPC.ServeDebugAPP(request, response);
+                }
+                else {
+                    request.RequestData = {};
+
+                    //We alwasy use JSON for post!!!
+                    response.writeHead(200, {
+                        'Content-Type': 'application/json'
                     });
 
+                    try {
+                        const url = require('url');
+                        const path = require('path');
 
-                    request.on('end', function () {
-                        if (body == '') {
-                            response.end();
-                        }
-                        else {
-                            request.RequestData = {};
+                        try {
+                            request.RequestData = JSON.parse(body);
 
-                            //We alwasy use JSON for post!!!
-                            response.writeHead(200, {
-                                'Content-Type': 'application/json'
+                        } catch (badJSON) {
+
+                            response.SendError(response, {
+                                err: badJSON
                             });
 
-                            try {
-                                const url = require('url');
-                                const path = require('path');
-
-                                try {
-                                    request.RequestData = JSON.parse(body);
-
-                                } catch (badJSON) {
-
-                                    response.SendError(response, {
-                                        err: badJSON
-                                    });
-
-                                }
-
-                                // debugger;
-                                if (!request.RequestData.service) {
-                                    response.end(JSON.stringify({
-                                        err: 'No service defined!'
-                                    }));
-                                    return;
-                                }
-                                //Do not allow ".." in the path!!!!
-                                const servicePath = request.RequestData.service.replace(/\./g, '');
-
-
-
-                                // var servicePath = request.url.replace(/\./g, '');
-
-
-                                const finalServicePath = path.resolve(path.join(__dirname, "services", path.normalize(path.join(servicePath, 'index.js'))));
-
-                                const route2Take = require(finalServicePath);
-                                route2Take.ServiceRequest(request, response);
-                            }
-                            catch (errEndReq) {
-                                var resp = {
-                                    error: 'Error in request!',
-                                    //  body: body
-                                };
-                                console.log("REQUEST ERROR!");
-                                console.log("URL", request.url);
-                                console.log(errEndReq.message);
-                                console.log(body);
-                                // debugger;
-                                response.end(JSON.stringify(resp));
-                            }
                         }
-                    });
+
+                        // debugger;
+                        if (!request.RequestData.service) {                            
+                            response.end(JSON.stringify({
+                                err: 'No service defined!'
+                            }));
+                            return;
+                        }
+                        //Do not allow ".." in the path!!!!
+                        const servicePath = request.RequestData.service.replace(/\./g, '');
+
+
+
+                        // var servicePath = request.url.replace(/\./g, '');
+
+
+                        const finalServicePath = path.resolve(path.join(__dirname, "services", path.normalize(path.join(servicePath, 'index.js'))));
+
+                        const route2Take = require(finalServicePath);
+                        route2Take.ServiceRequest(request, response);
+                    }
+                    catch (errEndReq) {
+                        var resp = {
+                            error: 'Error in request!',
+                            //  body: body
+                        };
+                        console.log("REQUEST ERROR!");
+                        console.log("URL", request.url);
+                        console.log(errEndReq.message);
+                        console.log(body);
+                        // debugger;
+                        response.end(JSON.stringify(resp));
+                    }
                 }
-                catch (errPUT) {
-
-
-                    response.SendError(response, {
-                        err: errPUT
-                    });
-
-                }
-
-
-                break
-            case "GET":
-                //Any get request they make will be from a browser so just give them the debug page...
-                IPC.ServeDebugAPP(request, response);
-
-                break;
-            default:
-                // debugger;
-                console.log(request.method.toUpperCase() + ' Method Not Supported! .. YET... ');
-                response.end(request.method.toUpperCase() + ' Method Not Supported! .. YET... ');
-                break;
-
+            });
         }
+        catch (errPUT) {
+
+
+            response.SendError(response, {
+                err: errPUT
+            });
+
+        }        
+
+
+
+
+
+
+
+
+
+
     }
 };
 
