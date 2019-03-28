@@ -4,13 +4,18 @@
             {
                 "text":"Get All Assets (SQL)",
                 "cmd":"ServerAPI.TEST.GetAllAssets();",
-                "title":"More help"
+                "title":"Use MySQL to get data..."
             },
             {
                 "text":"Get DB Stats (SQL)",
                 "cmd":"ServerAPI.TEST.GetDBStats();",
-                "title":"More help"
-            }
+                "title":"Gets the totals for tables..."
+            },
+            {
+                "text":"Get The Data File",
+                "cmd":"ServerAPI.GetDataFolder();",
+                "title":"Gets the flat data file when syncing..."
+            }            
         ],
         "notes": "Get data from the MySQL server..."
     },
@@ -19,12 +24,12 @@
             {
                 "text":"Get Basic Help",
                 "cmd":"ServerAPI.GetHelp();",
-                "title":"More help"
+                "title":"An example of the API documenting itself."
             },
             {
                 "text":"Help on listing assests",
                 "cmd":"ServerAPI.GetHelp('listing assests');",
-                "title":"More help"
+                "title":"Of course the help needs lots of work! :-)"
             }
         ],        
         "notes": "Help on this system."
