@@ -61,6 +61,3 @@ This is quick running to do list of items that should be moved to the github iss
 - [ ] Sync Airtable data  
 
 
-git@github.com:johnrnelson/innovate-eugene-api.git
-
-git remote set-url origin git@github.com:johnrnelson/REPOSITORY.git
